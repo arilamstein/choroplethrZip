@@ -1,0 +1,9 @@
+Package: usZipMap
+Type: Package
+Title: Data and Visualization for US ZIP Codes
+Version: 1.0.0
+Date: 2015-03-03
+Author: Ari Lamstein
+Maintainer:  Ari Lamstein <arilamstein@gmail.com>
+Description: More about what it does (maybe more than one line)
+License: MIT + file LICENSE
