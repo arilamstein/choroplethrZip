@@ -20,3 +20,15 @@
 #' ggplot(zcta.map, aes(long, lat, group=group)) + geom_polygon()
 #' }
 NULL
+
+#' A data.frame consisting of the name of each region in the map zcta.map.
+#' 
+#' @seealso ?zcta.map
+#'  
+#' @docType data
+#' @name zcta.regions
+#' @usage data(zcta.regions)
+#' @examples
+#' data(zcta.regions)
+#' head(zcta.regions) 
+NULL
