@@ -1,7 +1,6 @@
 #' Create a ZIP-level choropleth
 #' 
 #' @export
-#' @importFrom dplyr left_join
 #' @importFrom R6 R6Class
 ZipChoropleth = R6Class("ZipChoropleth",
   inherit = choroplethr:::Choropleth,
@@ -29,12 +28,6 @@ ZipChoropleth = R6Class("ZipChoropleth",
 #' @param zoom An optional vector of ZIPs to zoom in on. Elements of this vector must exactly 
 #' match the names of ZIPs as they appear in the "region" column of ?zcta.regions
 #' @export
-#' @importFrom Hmisc cut2
-#' @importFrom stringr str_extract_all
-#' @importFrom ggplot2 ggplot aes geom_polygon scale_fill_brewer ggtitle theme theme_grey element_blank geom_text
-#' @importFrom ggplot2 scale_fill_continuous scale_colour_brewer
-#' @importFrom scales comma
-#' @importFrom grid unit
 zip_choropleth = function(df, title="", legend="", buckets=7, zoom=NULL)
 {
   c = ZipChoropleth$new(df)

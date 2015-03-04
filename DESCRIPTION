@@ -8,10 +8,4 @@ Maintainer: Ari Lamstein <arilamstein@gmail.com>
 Description: More about what it does (maybe more than one line)
 License: MIT + file LICENSE
 Imports:
-    scales,
-    Hmisc,
-    stringr,
-    ggplot2,
-    dplyr,
-    R6,
-    choroplethr
+    R6
