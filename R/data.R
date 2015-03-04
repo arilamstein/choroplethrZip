@@ -21,13 +21,16 @@
 #' }
 NULL
 
-#' A data.frame consisting of the name of each region in the map zcta.map.
+#' A data.frame consisting of the name of each region in the map zcta.map as well as the 
+#' state and county FIPS codes of that region.
 #' 
 #' @seealso ?zip.map
 #'  
 #' @docType data
 #' @name zip.regions
 #' @usage data(zip.regions)
+#' @references Data comes from the US Census Bureau's 2010 ZCTA to County Relationship File: 
+#' https://www.census.gov/geo/maps-data/data/zcta_rel_download.html
 #' @examples
 #' data(zip.regions)
 #' head(zip.regions) 
