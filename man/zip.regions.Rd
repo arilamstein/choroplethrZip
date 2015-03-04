@@ -3,14 +3,13 @@
 \docType{data}
 \name{zip.regions}
 \alias{zip.regions}
-\title{A data.frame consisting of the name of each region in the map zcta.map as well as the
-state and county names and FIPS codes of that region.}
+\title{A data.frame consisting of the name of each region (i.e. zip code) in the map zcta.map along with additional information.}
 \usage{
 data(zip.regions)
 }
 \description{
-A data.frame consisting of the name of each region in the map zcta.map as well as the
-state and county names and FIPS codes of that region.
+The additional information is the state name, county name and the county fips code as a numer. Note that this data.frame
+contains duplicates, because some zip codes span counties.
 }
 \examples{
 data(zip.regions)

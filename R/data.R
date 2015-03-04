@@ -21,8 +21,10 @@
 #' }
 NULL
 
-#' A data.frame consisting of the name of each region in the map zcta.map as well as the 
-#' state and county names and FIPS codes of that region.
+#' A data.frame consisting of the name of each region (i.e. zip code) in the map zcta.map along with additional information.
+#' 
+#' The additional information is the state name, county name and the county fips code as a numer. Note that this data.frame
+#' contains duplicates, because some zip codes span counties.
 #' 
 #' @seealso ?zip.map
 #'  
