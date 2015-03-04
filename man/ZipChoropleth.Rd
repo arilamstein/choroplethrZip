@@ -4,7 +4,7 @@
 \name{ZipChoropleth}
 \alias{ZipChoropleth}
 \title{Create a ZIP-level choropleth}
-\format{\preformatted{Class 'R6ClassGenerator' <environment: 0x13b0c3958> 
+\format{\preformatted{Class 'R6ClassGenerator' <environment: 0x14748e440> 
  - attr(*, "name")= chr "ZipChoropleth_generator"
 }}
 \usage{

@@ -22,7 +22,7 @@
 NULL
 
 #' A data.frame consisting of the name of each region in the map zcta.map as well as the 
-#' state and county FIPS codes of that region.
+#' state and county names and FIPS codes of that region.
 #' 
 #' @seealso ?zip.map
 #'  

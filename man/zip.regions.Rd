@@ -3,16 +3,22 @@
 \docType{data}
 \name{zip.regions}
 \alias{zip.regions}
-\title{A data.frame consisting of the name of each region in the map zcta.map.}
+\title{A data.frame consisting of the name of each region in the map zcta.map as well as the
+state and county names and FIPS codes of that region.}
 \usage{
 data(zip.regions)
 }
 \description{
-A data.frame consisting of the name of each region in the map zcta.map.
+A data.frame consisting of the name of each region in the map zcta.map as well as the
+state and county names and FIPS codes of that region.
 }
 \examples{
 data(zip.regions)
 head(zip.regions)
+}
+\references{
+Data comes from the US Census Bureau's 2010 ZCTA to County Relationship File:
+https://www.census.gov/geo/maps-data/data/zcta_rel_download.html
 }
 \seealso{
 ?zip.map
