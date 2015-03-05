@@ -8,8 +8,11 @@
 data(zip.regions)
 }
 \description{
-The additional information is the state name, county name and the county fips code as a numer. Note that this data.frame
-contains duplicates, because some zip codes span counties.
+The additional information is the state name, county name, county fips code, cbsa code, cbsa title and
+metropolitan/micropolitan statistical area name (if applicable).
+}
+\details{
+Note that this data.frame contains duplicates, because some zip codes span counties and states.
 }
 \examples{
 data(zip.regions)
