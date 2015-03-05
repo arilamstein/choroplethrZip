@@ -1,4 +1,4 @@
-Package: usZipMap
+Package: choroplethrZip
 Type: Package
 Title: Data and Visualization for US ZIP Codes
 Version: 1.0.0
@@ -7,5 +7,3 @@ Author: Ari Lamstein
 Maintainer: Ari Lamstein <arilamstein@gmail.com>
 Description: More about what it does (maybe more than one line)
 License: MIT + file LICENSE
-Imports:
-    R6
