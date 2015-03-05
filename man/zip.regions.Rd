@@ -16,8 +16,10 @@ data(zip.regions)
 head(zip.regions)
 }
 \references{
-Data comes from the US Census Bureau's 2010 ZCTA to County Relationship File:
-https://www.census.gov/geo/maps-data/data/zcta_rel_download.html
+Data comes from the US Census Bureau's 2010 ZCTA to County Relationship File (
+https://www.census.gov/geo/maps-data/data/zcta_rel_download.html), 2010 ZCTA to Metropolitan and Micropolitan Statistical
+Areas Relationship File and the Core based statistical areas (CBSAs) and combined statistical areas (CSAs) Metropolitan
+and Micropolitan Delineation files (http://www.census.gov/population/metro/data/def.html).
 }
 \seealso{
 ?zip.map
