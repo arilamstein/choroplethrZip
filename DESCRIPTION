@@ -12,3 +12,4 @@ Description: The map is taken from the US Census Bureau's 2013 Cartographic Boun
 URL: https://github.com/arilamstein/choroplethrZip,
     https://groups.google.com/forum/#!forum/choroplethr
 License: MIT + file LICENSE
+Suggests: ggplot2
