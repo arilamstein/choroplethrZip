@@ -1,7 +1,6 @@
-#' data.frame representation of a shapefile of US ZIP Codes
+#' Map of US Zip Code Tabulated Areas (ZCTAs)
 #' 
-#' The map is of Zip Code Tabulated Areas (ZCTAs) of the 50 US States plus the District of Columbia and
-#' comes from the US Census Bureau. The shapefile
+#' The map
 #' was modified using QGIS in order to remove Puerto Rico, islands off of Alaska that
 #' crossed the antimeridian and American Samoa. A column named "region" was added for convenience which
 #' is a duplicate of the column named ZCTA5CE10.
@@ -13,31 +12,47 @@
 #' https://www.census.gov/geo/maps-data/data/cbf/cbf_zcta.html. 
 #' @examples
 #' \dontrun{
-#' # render the map with ggplot2
+#' # render all Zip Code Tabulated Areas in New York
 #' library(ggplot2)
-#' 
 #' data(zip.map)
-#' ggplot(zip.map, aes(long, lat, group=group)) + geom_polygon()
+#' data(zip.regions)
+#' 
+#' ny.zips = zip.regions[zip.regions$state.name=="new york", "region"]
+#' ny.zip.map = zip.map[zip.map$region %in% ny.zips, ]
+#' ggplot(ny.zip.map, aes(long, lat, group=group)) + 
+#'     geom_polygon() + 
+#'     ggtitle("NY Zip Code Tabulated Areas (ZCTAs)")
 #' }
 NULL
 
-#' A data.frame consisting of the name of each region (i.e. zip code) in the map zcta.map along with additional information.
+#' Metadata about US Zip Code Tabulated Areas (ZCTAs)
 #' 
-#' The additional information is the state name, county name, county fips code, cbsa code, cbsa title and 
-#' metropolitan/micropolitan statistical area name (if applicable).
+#' The metadata is: State name, County name, County FIPS code, Core Based Statistical
+#' Area (CBSA) id, CBSA title and 
+#' Metropolitan/Micropolitan Statistical Area (MSA) name.
 #' 
-#' Note that this data.frame contains duplicates, because some zip codes span counties and states.
+#' Note that this data.frame contains duplicates, because some ZCTAs span multiple Counties and States.
 #' 
 #' @seealso ?zip.map
 #'  
 #' @docType data
 #' @name zip.regions
 #' @usage data(zip.regions)
-#' @references Data comes from the US Census Bureau's 2010 ZCTA to County Relationship File ( 
-#' https://www.census.gov/geo/maps-data/data/zcta_rel_download.html), 2010 ZCTA to Metropolitan and Micropolitan Statistical 
-#' Areas Relationship File and the Core based statistical areas (CBSAs) and combined statistical areas (CSAs) Metropolitan 
+#' @references Data comes from the US Census Bureau's 2010 ZCTA to County Relationship File 
+#' (https://www.census.gov/geo/maps-data/data/zcta_rel_download.html), 2010 ZCTA to Metropolitan and Micropolitan Statistical 
+#' Areas Relationship File and the Core Based Statistical Areas (CBSAs) and Combined Statistical Areas (CSAs) Metropolitan 
 #' and Micropolitan Delineation files (http://www.census.gov/population/metro/data/def.html).
 #' @examples
+#' \dontrun{
+#' # render all Zip Code Tabulated Areas in New York
+#' library(ggplot2)
+#' data(zip.map)
 #' data(zip.regions)
-#' head(zip.regions) 
+#' 
+#' ny.zips = zip.regions[zip.regions$state.name=="new york", "region"]
+#' ny.zip.map = zip.map[zip.map$region %in% ny.zips, ]
+#' ggplot(ny.zip.map, aes(long, lat, group=group)) + 
+#'     geom_polygon() + 
+#'     ggtitle("NY Zip Code Tabulated Areas (ZCTAs)")
+#' }
 NULL
