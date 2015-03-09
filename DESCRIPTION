@@ -1,9 +1,14 @@
 Package: choroplethrZip
 Type: Package
-Title: Data and Visualization for US ZIP Codes
+Title: Contains a shapefile of US Zip Code Tabulated Areas (ZCTAs)
 Version: 1.0.0
 Date: 2015-03-03
 Author: Ari Lamstein
 Maintainer: Ari Lamstein <arilamstein@gmail.com>
-Description: More about what it does (maybe more than one line)
+Description: The map is taken from the US Census Bureau's 2013 Cartographic Boundary 
+  Shapefiles - ZIP Code Tabulation Areas (ZCTAs). See ?zip.map for additional information.
+  Metadata about each ZCTA is in ?zip.regions. Metadata includes State, County and 
+  Metropolitan / Micropolitan Statistical Area (MSA). 
+URL: https://github.com/arilamstein/choroplethrZip,
+    https://groups.google.com/forum/#!forum/choroplethr
 License: MIT + file LICENSE
