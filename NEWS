@@ -1,0 +1,4 @@
+choroplethrZip 1.1.0
+-------------------------------
+-add zip_choropleth function
+-add zip_choropleth_acs function

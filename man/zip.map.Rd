@@ -13,20 +13,6 @@ was modified using QGIS in order to remove Puerto Rico, islands off of Alaska th
 crossed the antimeridian and American Samoa. A column named "region" was added for convenience which
 is a duplicate of the column named ZCTA5CE10.
 }
-\examples{
-\dontrun{
-# render all Zip Code Tabulated Areas in New York
-library(ggplot2)
-data(zip.map)
-data(zip.regions)
-
-ny.zips = zip.regions[zip.regions$state.name=="new york", "region"]
-ny.zip.map = zip.map[zip.map$region \%in\% ny.zips, ]
-ggplot(ny.zip.map, aes(long, lat, group=group)) +
-    geom_polygon() +
-    ggtitle("NY Zip Code Tabulated Areas (ZCTAs)")
-}
-}
 \references{
 Taken from the US Census 2013 Cartographic Boundary Shapefiles - ZIP Code Tabulation Areas (ZCTAs):
 https://www.census.gov/geo/maps-data/data/cbf/cbf_zcta.html.

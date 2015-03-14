@@ -10,19 +10,6 @@
 #' @usage data(zip.map)
 #' @references Taken from the US Census 2013 Cartographic Boundary Shapefiles - ZIP Code Tabulation Areas (ZCTAs): 
 #' https://www.census.gov/geo/maps-data/data/cbf/cbf_zcta.html. 
-#' @examples
-#' \dontrun{
-#' # render all Zip Code Tabulated Areas in New York
-#' library(ggplot2)
-#' data(zip.map)
-#' data(zip.regions)
-#' 
-#' ny.zips = zip.regions[zip.regions$state.name=="new york", "region"]
-#' ny.zip.map = zip.map[zip.map$region %in% ny.zips, ]
-#' ggplot(ny.zip.map, aes(long, lat, group=group)) + 
-#'     geom_polygon() + 
-#'     ggtitle("NY Zip Code Tabulated Areas (ZCTAs)")
-#' }
 NULL
 
 #' Metadata about US Zip Code Tabulated Areas (ZCTAs)
@@ -42,17 +29,16 @@ NULL
 #' (https://www.census.gov/geo/maps-data/data/zcta_rel_download.html), 2010 ZCTA to Metropolitan and Micropolitan Statistical 
 #' Areas Relationship File and the Core Based Statistical Areas (CBSAs) and Combined Statistical Areas (CSAs) Metropolitan 
 #' and Micropolitan Delineation files (http://www.census.gov/population/metro/data/def.html).
-#' @examples
-#' \dontrun{
-#' # render all Zip Code Tabulated Areas in New York
-#' library(ggplot2)
-#' data(zip.map)
-#' data(zip.regions)
+NULL
+
+#' A data.frame containing population estimates for US Zip Code Tabulated Areas (ZCTAs) in 2012.   
 #' 
-#' ny.zips = zip.regions[zip.regions$state.name=="new york", "region"]
-#' ny.zip.map = zip.map[zip.map$region %in% ny.zips, ]
-#' ggplot(ny.zip.map, aes(long, lat, group=group)) + 
-#'     geom_polygon() + 
-#'     ggtitle("NY Zip Code Tabulated Areas (ZCTAs)")
-#' }
+#' ZCTAs are intended to be roughly analogous to postal ZIP codes.
+#'
+#' @name df_pop_zip
+#' @docType data
+#' @references Taken from the US American Community Survey (ACS) 5 year estimates.
+#' ZCTAs, and their realationship to ZIP codes, are explained here \url{https://www.census.gov/geo/reference/zctas.html}.
+#' @keywords data
+#' @usage data(df_pop_zip)
 NULL

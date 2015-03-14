@@ -15,20 +15,6 @@ Metropolitan/Micropolitan Statistical Area (MSA) name.
 \details{
 Note that this data.frame contains duplicates, because some ZCTAs span multiple Counties and States.
 }
-\examples{
-\dontrun{
-# render all Zip Code Tabulated Areas in New York
-library(ggplot2)
-data(zip.map)
-data(zip.regions)
-
-ny.zips = zip.regions[zip.regions$state.name=="new york", "region"]
-ny.zip.map = zip.map[zip.map$region \%in\% ny.zips, ]
-ggplot(ny.zip.map, aes(long, lat, group=group)) +
-    geom_polygon() +
-    ggtitle("NY Zip Code Tabulated Areas (ZCTAs)")
-}
-}
 \references{
 Data comes from the US Census Bureau's 2010 ZCTA to County Relationship File
 (https://www.census.gov/geo/maps-data/data/zcta_rel_download.html), 2010 ZCTA to Metropolitan and Micropolitan Statistical
