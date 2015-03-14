@@ -40,7 +40,6 @@ map used is zip.map in the choroplethrZip package. See zip.regions for
 an object which can help you coerce your regions into the required format.
 }
 \examples{
-\dontrun{
 library(choroplethrZip)
 data(df_pop_zip)
 
@@ -71,7 +70,6 @@ zip_choropleth(df_pop_zip,
                msa_zoom="New York-Newark-Jersey City, NY-NJ-PA",
                title="2012 NY-Newark-Jersey City MSA\\nZCTA Population Estimates",
                legend="Population")
-}
 }
 \seealso{
 \url{https://www.census.gov/geo/reference/zctas.html} for an explanation of ZCTAs and how they relate to US Zip Codes.

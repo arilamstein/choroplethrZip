@@ -31,7 +31,6 @@
 #' @references Uses the acs package created by Ezra Haber Glenn.
 #' @export
 #' @examples
-#' \dontrun{
 #' # Median income of all ZCTAs in New York State
 #' zip_choropleth_acs("B19301", state_zoom="new york")
 #' 
@@ -46,11 +45,10 @@
 #' 
 #' # show all ZCTAs in the New York Metropolitan Statistical Area (MSA)
 #' zip_choropleth_acs("B19301", msa_zoom="New York-Newark-Jersey City, NY-NJ-PA")
-#' } 
 #' @importFrom choroplethr get_acs_data
 zip_choropleth_acs = function(tableId, endyear=2011, span=5, num_colors=7, state_zoom=NULL, county_zoom=NULL, msa_zoom=NULL, zip_zoom=NULL)
 {
-  acs.data = get_acs_data("zip", tableId, endyear, span)
+  acs.data = get_acs_data(tableId, "zip", endyear, span)
   
   # remove values that are not on the map to prevent the warning
   data(zip.regions, package="choroplethrZip", envir=environment())

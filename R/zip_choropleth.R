@@ -82,7 +82,6 @@ ZipChoropleth = R6Class("ZipChoropleth",
 #' of ?zip.regions.
 #'
 #' @examples
-#' \dontrun{
 #' library(choroplethrZip)
 #' data(df_pop_zip)
 #'
@@ -113,7 +112,6 @@ ZipChoropleth = R6Class("ZipChoropleth",
 #'                msa_zoom="New York-Newark-Jersey City, NY-NJ-PA", 
 #'                title="2012 NY-Newark-Jersey City MSA\nZCTA Population Estimates",
 #'                legend="Population")
-#' }
 #' @seealso \url{https://www.census.gov/geo/reference/zctas.html} for an explanation of ZCTAs and how they relate to US Zip Codes.
 #' @export
 #' @importFrom Hmisc cut2
