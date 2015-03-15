@@ -17,6 +17,8 @@ library(choroplethrZip)
 zip_choropleth_acs("B19301", state_zoom="new york")
 ```
 
+Note that `zip_choropleth_acs` will often emit warnings because demographic information is not available for every ZCTA. For example ZCTA 14893 only has a population of 6 people, so no median income is returned.
+
 ## All ZCTAs in Selected Counties
 
 ```{r}

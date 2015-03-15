@@ -6,9 +6,9 @@
 US ZIP Choropleths
 ===
 
-You can create a choropleth of US ZIP codes with the function `zip_choropleth`. Note that what is rendered are actually US Zip Code Tabulated Areas (ZCTAs) from the US Census Bureau, not US Postal Service ZIP codes. [This page](https://www.census.gov/geo/reference/zctas.html) from the Census Bureau explains the differences. Also see `?zip.map` in the package `choroplethrZip` for more details.
+You can create a choropleth of US ZIP codes with the function `zip_choropleth`. Note that what is rendered are actually US Zip Code Tabulated Areas (ZCTAs) from the US Census Bureau, not US Postal Service ZIP codes. [This page](https://www.census.gov/geo/reference/zctas.html) from the Census Bureau explains the differences. Also see `?zip.map` for more details.
 
-Note that because of its size (~60MB) the `choroplethrZip` package is not hosted on CRAN. Rather, it is hosted on github [here](https://github.com/arilamstein/choroplethrZip). You can install the package by typing the installation instructions on that page.
+Note that because of its size (~60MB) the `choroplethrZip` package is not hosted on CRAN. Rather, it is hosted on github [here](https://github.com/arilamstein/choroplethrZip). You can install the package by following the installation instructions on that page.
 
 Here is a map of population estimates of all ZCTAs in New York state:
 
