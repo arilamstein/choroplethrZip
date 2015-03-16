@@ -43,6 +43,7 @@ Requires the acs package to be installed, and a Census API Key to be set with
 the acs's api.key.install function.  Census API keys can be obtained at http://www.census.gov/developers/tos/key_request.html.
 }
 \examples{
+\dontrun{
 # Median income of all ZCTAs in New York State
 zip_choropleth_acs("B19301", state_zoom="new york")
 
@@ -57,6 +58,7 @@ zip_choropleth_acs("B19301", num_colors=1, zip_zoom=c(manhattan_les, manhattan_u
 
 # show all ZCTAs in the New York Metropolitan Statistical Area (MSA)
 zip_choropleth_acs("B19301", msa_zoom="New York-Newark-Jersey City, NY-NJ-PA")
+}
 }
 \references{
 Uses the acs package created by Ezra Haber Glenn.
