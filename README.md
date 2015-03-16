@@ -1,6 +1,6 @@
 # choroplethrZip
 
-v1.0.0 (latest release): [![Build Status](https://travis-ci.org/arilamstein/choroplethrZip.svg?branch=v1.0.0)](https://travis-ci.org/arilamstein/choroplethrZip/branches)
+v1.1.0 (latest release): [![Build Status](https://travis-ci.org/arilamstein/choroplethrZip.svg?branch=v1.1.0)](https://travis-ci.org/arilamstein/choroplethrZip/branches)
 
 Master: [![Build Status](https://travis-ci.org/arilamstein/choroplethrZip.svg)](https://travis-ci.org/arilamstein/choroplethrZip)
 
