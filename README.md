@@ -13,5 +13,5 @@ Due to this package's size (~60MB) it is hosted on github, not CRAN. To install 
 ```
 # install.packages("devtools")
 library(devtools)
-install_github('arilamstein/choroplethrZip@v1.0.0')
+install_github('arilamstein/choroplethrZip@v1.1.0')
 ```
