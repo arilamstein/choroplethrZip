@@ -1,6 +1,6 @@
 # choroplethrZip
 
-v1.1.0: [![Build Status](https://travis-ci.org/arilamstein/choroplethrZip.svg?branch=v1.1.0)](https://travis-ci.org/arilamstein/choroplethrZip/branches)
+v1.1.1: [![Build Status](https://travis-ci.org/arilamstein/choroplethrZip.svg?branch=v1.1.1)](https://travis-ci.org/arilamstein/choroplethrZip/branches)
 
 Master: [![Build Status](https://travis-ci.org/arilamstein/choroplethrZip.svg)](https://travis-ci.org/arilamstein/choroplethrZip)
 
@@ -13,7 +13,7 @@ Due to this package's size (~60MB) it is hosted on github, not CRAN. To install 
 ```
 # install.packages("devtools")
 library(devtools)
-install_github('arilamstein/choroplethrZip@v1.1.0')
+install_github('arilamstein/choroplethrZip@v1.1.1')
 ```
 
 ## Usage
