@@ -126,5 +126,48 @@ zip_choropleth = function(df, title="", legend="", num_colors=7, state_zoom=NULL
   c$legend = legend
   c$set_num_colors(num_colors)
   c$set_zoom_zip(state_zoom=state_zoom, county_zoom=county_zoom, msa_zoom=msa_zoom, zip_zoom=zip_zoom)
-  c$render()
+  ret = c$render()
+  
+  # if user opted to zoom by states, then add zip outlines
+  if (!is.null(state_zoom))
+  {
+    ret + render_state_outline(state_zoom) 
+  } else if (!is.null(county_zoom)) {
+    ret + render_county_outline(county_zoom)
+  } else if (!is.null(msa_zoom)) {
+    # TODO: extract counties from msa, then render outlines of counties
+    ret
+  } else {  
+    ret
+  }
+}
+
+render_state_outline = function(states)
+{
+  if (!requireNamespace("choroplethrMaps", quietly = TRUE)) {
+    stop("Package choroplethrMaps is needed for this function to work. Please install it.", call. = FALSE)
+  }
+  
+  data(state.map, package="choroplethrMaps", envir=environment())
+  data(state.regions, package="choroplethrMaps", envir=environment())
+  
+  stopifnot(states %in% state.regions$region)
+  
+  df = state.map[state.map$region %in% states, ]
+  geom_polygon(data=df, aes(long, lat, group = group), color = "black", fill = NA, size = 0.2)
+}
+
+render_county_outline = function(counties)
+{
+  if (!requireNamespace("choroplethrMaps", quietly = TRUE)) {
+    stop("Package choroplethrMaps is needed for this function to work. Please install it.", call. = FALSE)
+  }
+  
+  data(county.map, package="choroplethrMaps", envir=environment())
+  data(county.regions, package="choroplethrMaps", envir=environment())
+  
+  stopifnot(counties %in% county.regions$region)
+  
+  df = county.map[county.map$region %in% counties, ]
+  geom_polygon(data=df, aes(long, lat, group = group), color = "black", fill = NA, size = 0.2)
 }
