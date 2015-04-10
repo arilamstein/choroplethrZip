@@ -193,6 +193,7 @@ zip_choropleth = function(df, title="", legend="", num_colors=7, state_zoom=NULL
     c = ZipChoropleth$new(df)
     c$title  = title
     c$legend = legend
+    c$set_zoom_zip(state_zoom=state_zoom, county_zoom=county_zoom, msa_zoom=msa_zoom, zip_zoom=zip_zoom)
     c$set_num_colors(num_colors)
     c$render()
   }
