@@ -1,3 +1,8 @@
+choroplethrZip 1.2.0
+-------------------------------
+-zip_choropleth now supports nationwide choropleths. Note that nationwide choropleths can take a 
+few minutes to render, so it is still recommended to use one of the various zooms.
+
 choroplethrZip 1.1.0
 -------------------------------
 -add zip_choropleth function

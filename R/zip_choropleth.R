@@ -26,11 +26,9 @@ ZipChoropleth = R6Class("ZipChoropleth",
     # seeming just disappear
     set_zoom_zip = function(state_zoom, county_zoom, msa_zoom, zip_zoom)
     {
-      # user must zoom by exactly one of the options
+      # user can zoom by at most one of these options
       num_zooms_selected = sum(!is.null(c(state_zoom, county_zoom, msa_zoom, zip_zoom)))
-      if (num_zooms_selected == 0) {
-        stop("Full zip choropleths are not supported. Please select one of zip_zoom, county_zoom, state_zoom or msa_zoom")
-      } else if (num_zooms_selected > 1) {
+      if (num_zooms_selected > 1) {
         stop("You can only zoom in by one of zip_zoom, county_zoom, state_zoom or msa_zoom")
       }
       
@@ -52,6 +50,56 @@ ZipChoropleth = R6Class("ZipChoropleth",
         stopifnot(all(msa_zoom %in% unique(zip.regions$cbsa.title)))
         zips = zip.regions[zip.regions$cbsa.title %in% msa_zoom, "region"]
         super$set_zoom(zips)                
+      }
+    },
+    
+    render_nationwide = function()
+    {
+      data(zip.regions, package="choroplethrZip", envir=environment())
+
+      self$prepare_map()
+      
+      # first render the continental us
+      continental_zips   = zip.regions[!zip.regions$state.name %in% c("alaska", "hawaii"), "region"]
+      continental.df     = self$choropleth.df[self$choropleth.df$region %in% continental_zips, ]
+      continental.ggplot = self$render_helper(continental.df, self$scale_name, self$theme_clean()) + ggtitle(self$title)
+      
+      ret = continental.ggplot
+      
+      # render ak and add as inset
+      ak_zips       = zip.regions[zip.regions$state.name == "alaska", "region"]
+      alaska.df     = self$choropleth.df[self$choropleth.df$region %in% ak_zips, ]
+      alaska.ggplot = self$render_helper(alaska.df, "", self$theme_inset())
+      alaska.grob   = ggplotGrob(alaska.ggplot)
+      ret           = ret + annotation_custom(grobTree(alaska.grob), xmin=-125, xmax=-110, ymin=22.5, ymax=30)
+
+      # render hi and add as inset
+      hi_zips       = zip.regions[zip.regions$state.name == "hawaii", "region"]
+      hawaii.df     = self$choropleth.df[self$choropleth.df$region %in% hi_zips, ]
+      hawaii.ggplot = self$render_helper(hawaii.df, "", self$theme_inset())
+      hawaii.grob   = ggplotGrob(hawaii.ggplot)
+      ret           = ret + annotation_custom(grobTree(hawaii.grob), xmin=-107.5, xmax=-102.5, ymin=25, ymax=27.5)
+
+      ret +
+        ggtitle(self$title)
+    },
+    
+    render_helper = function(choropleth.df, scale_name, theme)
+    {
+      # maps with numeric values are mapped with a continuous scale
+      if (is.numeric(choropleth.df$value))
+      {
+        ggplot(choropleth.df, aes(long, lat, group = group)) +
+          geom_polygon(aes(fill = value), size = 0) + 
+          self$get_scale() + 
+          theme;
+      } else { # assume character or factor
+        stopifnot(length(unique(na.omit(choropleth.df$value))) <= 9) # brewer scale only goes up to 9
+        
+        ggplot(choropleth.df, aes(long, lat, group = group)) +
+          geom_polygon(aes(fill = value), size = 0) + 
+          self$get_scale() + 
+          theme;
       }
     }
   )
@@ -81,7 +129,10 @@ ZipChoropleth = R6Class("ZipChoropleth",
 #' vector must exactly match the names of the state names as they appear in the "cbsa.title" column 
 #' of ?zip.regions.
 #'
+#' @note Nationwide zip choropleths can take a few minutes to render. 
+#' It is much faster to view a subset of the country by selecting a zoom. 
 #' @examples
+#' \dontrun{
 #' library(choroplethrZip)
 #' data(df_pop_zip)
 #'
@@ -112,6 +163,11 @@ ZipChoropleth = R6Class("ZipChoropleth",
 #'                msa_zoom="New York-Newark-Jersey City, NY-NJ-PA", 
 #'                title="2012 NY-Newark-Jersey City MSA\nZCTA Population Estimates",
 #'                legend="Population")
+#'                
+#'  # showing the entire country
+#'  # note: this takes a few minutes to run
+#'  zip_choropleth(df_pop_zip, title="2012 US ZCTA Population Estimates", legend="Population")
+#'  }
 #' @seealso \url{https://www.census.gov/geo/reference/zctas.html} for an explanation of ZCTAs and how they relate to US Zip Codes.
 #' @export
 #' @importFrom Hmisc cut2
@@ -121,10 +177,23 @@ ZipChoropleth = R6Class("ZipChoropleth",
 #' @importFrom scales comma
 zip_choropleth = function(df, title="", legend="", num_colors=7, state_zoom=NULL, county_zoom=NULL, msa_zoom=NULL, zip_zoom=NULL)
 {
-  c = ZipChoropleth$new(df)
-  c$title  = title
-  c$legend = legend
-  c$set_num_colors(num_colors)
-  c$set_zoom_zip(state_zoom=state_zoom, county_zoom=county_zoom, msa_zoom=msa_zoom, zip_zoom=zip_zoom)
-  c$render()
+  # nationwide map is special - no borders and insets for AK and HI
+  if (is.null(state_zoom) && is.null(county_zoom) && is.null(msa_zoom) && is.null(zip_zoom))
+  {
+    warning(paste0("Nationwide zip choropleths can take a few minutes to render. ",
+            "It is much faster to view a subset of the country by selecting a zoom. ",
+            "See ?zip_choropleth for zoom options."))
+    
+    c = ZipChoropleth$new(df)
+    c$title  = title
+    c$legend = legend
+    c$set_num_colors(num_colors)
+    c$render_nationwide()
+  } else {
+    c = ZipChoropleth$new(df)
+    c$title  = title
+    c$legend = legend
+    c$set_num_colors(num_colors)
+    c$render()
+  }
 }

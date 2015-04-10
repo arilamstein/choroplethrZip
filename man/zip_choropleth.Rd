@@ -39,7 +39,12 @@ Note that what is rendered are 2010 US Census Zip Code Tabulated Areas (ZCTAs), 
 map used is zip.map in the choroplethrZip package. See zip.regions for
 an object which can help you coerce your regions into the required format.
 }
+\note{
+Nationwide zip choropleths can take a few minutes to render.
+It is much faster to view a subset of the country by selecting a zoom.
+}
 \examples{
+\dontrun{
 library(choroplethrZip)
 data(df_pop_zip)
 
@@ -70,6 +75,11 @@ zip_choropleth(df_pop_zip,
                msa_zoom="New York-Newark-Jersey City, NY-NJ-PA",
                title="2012 NY-Newark-Jersey City MSA\\nZCTA Population Estimates",
                legend="Population")
+
+ # showing the entire country
+ # note: this takes a few minutes to run
+ zip_choropleth(df_pop_zip, title="2012 US ZCTA Population Estimates", legend="Population")
+ }
 }
 \seealso{
 \url{https://www.census.gov/geo/reference/zctas.html} for an explanation of ZCTAs and how they relate to US Zip Codes.
