@@ -46,3 +46,10 @@ test_that("msa_zoom returns ggplot", {
                  title="2012 NY-Newark-Jersey City MSA\nZip Population Estimates",
                  legend="Population"), "ggplot")
 })
+
+test_that("full county zoom returns ggplot", {
+  data(df_pop_zip, package="choroplethrZip")
+  expect_is(zip_choropleth(df_pop_zip,
+                           title="2012 USA\nZip Population Estimates",
+                           legend="Population"), "ggplot")
+})

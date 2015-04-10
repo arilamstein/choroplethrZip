@@ -44,7 +44,6 @@ Nationwide zip choropleths can take a few minutes to render.
 It is much faster to view a subset of the country by selecting a zoom.
 }
 \examples{
-\dontrun{
 library(choroplethrZip)
 data(df_pop_zip)
 
@@ -79,7 +78,6 @@ zip_choropleth(df_pop_zip,
  # showing the entire country
  # note: this takes a few minutes to run
  zip_choropleth(df_pop_zip, title="2012 US ZCTA Population Estimates", legend="Population")
- }
 }
 \seealso{
 \url{https://www.census.gov/geo/reference/zctas.html} for an explanation of ZCTAs and how they relate to US Zip Codes.
