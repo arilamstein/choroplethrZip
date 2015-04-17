@@ -1,3 +1,12 @@
+choroplethrZip 1.2.2
+-------------------------------
+-update vignettes for national maps
+-add in some missing data (e.g. news for v1.2.1)
+
+choroplethrZip 1.2.1
+-------------------------------
+-don't run examples because they take too long for travis
+
 choroplethrZip 1.2.0
 -------------------------------
 -zip_choropleth now supports nationwide choropleths. Note that nationwide choropleths can take a 

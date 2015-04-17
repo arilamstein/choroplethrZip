@@ -10,23 +10,21 @@ output: html_document
 %\VignetteIndexEntry{b) Choropleths of US Census ZCTA Data}
 -->
 
-# Mapping US Census ZCTA Data
-
 You can make choropleths of selected demographic information from the US Census Bureau with the function `?zip_choropleth_acs`. It functions analogously to the other "_acs" functions in the main choroplethr package.  Please see the vignette "Mapping Census Data" on the [choroplethr CRAN page](http://cran.r-project.org/web/packages/choroplethr/index.html) for additional details.
 
-Here are examples of looking at the median income of ZCTAs in New York State with the different zoom levels that `zip_choropleth_acs` supports:
+What makes `zip_choropleth_acs` unique is the number of zoom options. In addition to viewing all ZIPs in the country you can select ZIPs by State, County, Metropolitan Statistical Area (MSA) as well as manually specify a number of ZIPs. Here are examples using table B19301 (per capita income):
 
-## All ZCTAs in a State
+### All ZCTAs in a State
 
 ```{r, cache=TRUE, warning=FALSE}
 library(choroplethrZip)
-# Median income of all ZCTAs in New York State
+# Per capita income of all ZCTAs in New York State
 zip_choropleth_acs("B19301", state_zoom="new york")
 ```
 
-Note that `zip_choropleth_acs` will often emit warnings because demographic information is not available for every ZCTA. For example ZCTA 14893 only has a population of 6 people, so no median income is returned.
+Note that `zip_choropleth_acs` will often emit warnings because demographic information is not available for every ZCTA. 
 
-## All ZCTAs in Selected Counties
+### All ZCTAs in Selected Counties
 
 ```{r, cache=TRUE, warning=FALSE}
 library(choroplethrZip)
@@ -35,7 +33,7 @@ nyc_fips = c(36005, 36047, 36061, 36081, 36085)
 zip_choropleth_acs("B19301", county_zoom=nyc_fips)
 ```
 
-## Manually Selecting ZCTAs
+### Manually Selecting ZCTAs
 
 ```{r, cache=TRUE, warning=FALSE}
 library(choroplethrZip)
@@ -45,13 +43,15 @@ manhattan_ues = c("10021", "10028", "10044", "10128")
 zip_choropleth_acs("B19301", num_colors=1, zip_zoom=c(manhattan_les, manhattan_ues))
 ```
 
-## All ZCTAs in the New York Metropolitan Statistical Area (MSA)
+### All ZCTAs in a Metropolitan Statistical Area (MSA)
 
 ```{r, cache=TRUE, warning=FALSE}
 library(choroplethrZip)
 # show all ZCTAs in the New York Metropolitan Statistical Area (MSA)
 zip_choropleth_acs("B19301", msa_zoom="New York-Newark-Jersey City, NY-NJ-PA")
 ```
+
+### All ZCTAs in the USA
 
 Here is an example of viewing all ZCTAs in the country. While interesting to look at, this map has two problems: 1) it takes a few minutes to render and b) due to the large number (32,989) and irregular shape of ZCTAs, it can sometimes be hard to read. I have found that experimenting with the number of colors can be especially useful for this map.
 
