@@ -1,3 +1,10 @@
+---
+title: "Creating ZIP Code Choropleths of US Census Data with *choroplethrZip*"
+author: "Ari Lamstein"
+date: "April 16, 2015"
+output: html_document
+---
+
 <!--
   %\VignetteEngine{knitr}
 %\VignetteIndexEntry{b) Choropleths of US Census ZCTA Data}
@@ -11,7 +18,7 @@ Here are examples of looking at the median income of ZCTAs in New York State wit
 
 ## All ZCTAs in a State
 
-```{r}
+```{r, cache=TRUE, warning=FALSE}
 library(choroplethrZip)
 # Median income of all ZCTAs in New York State
 zip_choropleth_acs("B19301", state_zoom="new york")
@@ -21,7 +28,7 @@ Note that `zip_choropleth_acs` will often emit warnings because demographic info
 
 ## All ZCTAs in Selected Counties
 
-```{r}
+```{r, cache=TRUE, warning=FALSE}
 library(choroplethrZip)
 # zoom in on all ZCTAs in the 5 counties (boroughs) of New York City
 nyc_fips = c(36005, 36047, 36061, 36081, 36085)
@@ -30,7 +37,7 @@ zip_choropleth_acs("B19301", county_zoom=nyc_fips)
 
 ## Manually Selecting ZCTAs
 
-```{r}
+```{r, cache=TRUE, warning=FALSE}
 library(choroplethrZip)
 # compare Manhattan's Lower East Side and Upper East Side
 manhattan_les = c("10002", "10003", "10009")
@@ -40,8 +47,14 @@ zip_choropleth_acs("B19301", num_colors=1, zip_zoom=c(manhattan_les, manhattan_u
 
 ## All ZCTAs in the New York Metropolitan Statistical Area (MSA)
 
-```{r}
+```{r, cache=TRUE, warning=FALSE}
 library(choroplethrZip)
 # show all ZCTAs in the New York Metropolitan Statistical Area (MSA)
 zip_choropleth_acs("B19301", msa_zoom="New York-Newark-Jersey City, NY-NJ-PA")
+```
+
+Here is an example of viewing all ZCTAs in the country. While interesting to look at, this map has two problems: 1) it takes a few minutes to render and b) due to the large number (32,989) and irregular shape of ZCTAs, it can sometimes be hard to read. I have found that experimenting with the number of colors can be especially useful for this map.
+
+```{r, cache=TRUE, warning=FALSE}
+zip_choropleth_acs("B19301")
 ```
