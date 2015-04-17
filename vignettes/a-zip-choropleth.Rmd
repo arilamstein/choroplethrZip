@@ -14,19 +14,6 @@ You can create a choropleth of US ZIP codes with the function `zip_choropleth`. 
 
 Note that because of its size (~60MB) the `choroplethrZip` package is not hosted on CRAN. Rather, it is hosted on github [here](https://github.com/arilamstein/choroplethrZip). You can install the package by following the installation instructions on that page.
 
-Here is a map of population estimates of all ZCTAs in New York state. Note that rendering all ZCTAs in the country can take a few minutes.
-
-```{r, cache=TRUE}
-library(choroplethr)
-library(choroplethrZip)
-
-?df_pop_zip
-data(df_pop_zip)
-
-?zip_choropleth
-zip_choropleth(df_pop_zip, state_zoom="new york")
-```
-
 # Data Requirements
 
 The data.frame that you provide to `zip_choropleth` must have one column named "region" and one column named "value". Your entries for "region" must **exactly** match how regions are named in the map which choroplethr uses.  These names are defined in the object `zip.regions` along with some useful metadata:
@@ -43,7 +30,29 @@ In order to use choroplethr, you must use the naming convention in the "region" 
 
 # Exploring Data
 
-Like all choroplethr functions, `zip_choropleth` allows you to specify the scale with the `num_colors` parameter. What makes `zip_choropleth` unique is the number of zoom options. In addition to viewing all ZIPs in the country you can select ZIPs by State, County, Metropolitan Statistical Area (MSA) as well as manually specify a number of ZIPs. We previously saw the population of New York State by ZIP. Here is an example of using the `county_zoom` parameter to zoom in on the five Counties of New York City:
+Like all choroplethr functions, `zip_choropleth` allows you to specify the scale with the `num_colors` parameter. What makes `zip_choropleth` unique is the number of zoom options. In addition to viewing all ZIPs in the country you can select ZIPs by State, County, Metropolitan Statistical Area (MSA) as well as manually specify a number of ZIPs.
+
+### All ZCTAs in a State
+
+Here is an example of viewing all ZCTAs in a State by using the `state_zoom` parameter:
+
+```{r, cache=TRUE}
+library(choroplethr)
+library(choroplethrZip)
+
+?df_pop_zip
+data(df_pop_zip)
+
+?zip_choropleth
+zip_choropleth(df_pop_zip, 
+               state_zoom="new york", 
+               title="2012 New York State ZCTA Population Estimates",
+               legend="Population")
+```
+
+### All ZCTAs in Selected Counties
+
+Here is an example of using the `county_zoom` parameter to zoom in on the five Counties of New York City:
 
 ```{r, cache=TRUE}
 # New York City is comprised of 5 counties: Bronx, Kings (Brooklyn), New York (Manhattan), 
@@ -55,7 +64,9 @@ zip_choropleth(df_pop_zip,
                legend="Population")
 ```
 
-Here is an example of using the `zip_zoom` parameter to zoom in on two neighborhoods in Manhattan:
+### Manually Selecting ZCTAs
+
+Here is an example of using the `zip_zoom` parameter to manually select all ZCTAs in two neighborhoods in Manhattan:
 ```{r, cache=TRUE}
 manhattan_les = c("10002", "10003", "10009")
 manhattan_ues = c("10021", "10028", "10044", "10128")
@@ -65,6 +76,8 @@ zip_choropleth(df_pop_zip,
                legend="Population")
 ```
 
+### All ZCTAs in a Metropolitan Statistical Area (MSA)
+
 Here is an example of using the `msa_zoom` parameter to zoom in on the entire New York Metropolitan Statistical Area (MSA):
 
 ```{r, cache=TRUE}
@@ -73,6 +86,8 @@ zip_choropleth(df_pop_zip,
                title="2012 NY-Newark-Jersey City MSA\nZCTA Population Estimates",
                legend="Population")
 ```
+
+### All ZCTAs in the USA
 
 Here is an example of viewing all ZCTAs in the country. While interesting to look at, this map has two problems: 1) it takes a few minutes to render and b) due to the large number (32,989) and irregular shape of ZCTAs, it can sometimes be hard to read. I have found that experimenting with the number of colors can be especially useful for this map.
 

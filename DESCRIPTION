@@ -1,7 +1,7 @@
 Package: choroplethrZip
 Type: Package
 Title: Shapefile, metadata and visualization functions for US Zip Code Tabulated Areas (ZCTAs).
-Version: 1.1.0
+Version: 1.2.2
 Date: 2015-03-03
 Author: Ari Lamstein
 Maintainer: Ari Lamstein <arilamstein@gmail.com>
