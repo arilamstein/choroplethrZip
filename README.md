@@ -20,7 +20,7 @@ install_github('arilamstein/choroplethrZip@v1.2.1')
 
 This package ships with two vignettes which explain how to use the package. For convenience I have also published them online:
 
-1. [Vignette 1: Creating ZIP Code Choropleths](http://rpubs.com/arilamstein/choroplethrZip-a)
-1. [Vignette 2: Creating ZIP Code Choropleths of US Census Data](http://rpubs.com/arilamstein/choroplethrZip-b)
+1. [Creating ZIP Code Choropleths with *choroplethrZip*](http://rpubs.com/arilamstein/zip-vignette-1)
+1. [Creating ZIP Code Choropleths of US Census Data with *choroplethrZip*](http://rpubs.com/arilamstein/zip-vignette-2)
 
 In short: type `?zip_choropleth` and `?zip_choropleth_acs` after installing the package to get started.
