@@ -2,7 +2,6 @@ choroplethrZip 1.3.0
 -------------------------------
 -add function ?get_zip_demographics which returns selected demographic statistics about each Zip Code Tabulated Area (ZCTA) the US. 
 -add data.frame df_zip_demographics which contains selected demographic statistics about each ZCTA from the US Census's 2013 5-year ACS.
--function zip_choropleth can now render national zips.
 
 choroplethrZip 1.2.2
 -------------------------------
