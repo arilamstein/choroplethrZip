@@ -22,5 +22,6 @@ This package ships with two vignettes which explain how to use the package. For 
 
 1. [Creating ZIP Code Choropleths with *choroplethrZip*](http://rpubs.com/arilamstein/zip-vignette-1)
 1. [Creating ZIP Code Choropleths of US Census Data with *choroplethrZip*](http://rpubs.com/arilamstein/zip-vignette-2)
+2. [Zip Code Demographics with choroplethrZip v1.3.0](http://rpubs.com/arilamstein/zip-vignette-3)
 
 In short: type `?zip_choropleth` and `?zip_choropleth_acs` after installing the package to get started.
