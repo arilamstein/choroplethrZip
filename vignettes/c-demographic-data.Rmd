@@ -1,0 +1,38 @@
+---
+title: "Zip Code Demographics with *choroplethrZip v1.3.0*"
+author: "Ari Lamstein"
+date: "April 28, 2015"
+output: html_document
+---
+
+choroplethrZip v1.3.0 ships with selected zip code demographic data from the US Census Bureau. The data comes from the 2013 5-year American Community Survey (ACS). Technically the regions are Zip Code Tabulated Areas (ZCTAS), not USPS ZIP Codes [(link)](https://www.census.gov/geo/reference/zctas.html).
+
+Here is the data:
+
+```{r}
+library(choroplethrZip)
+data(df_zip_demographics)
+?df_zip_demographics
+
+colnames(df_zip_demographics)
+```
+
+Here is a program that visualizes the data for New York City as a choropleth map:
+
+```{r, warning=FALSE}
+# FIPS codes for the 5 counties (boroughs) of New York City
+nyc_fips = c(36005, 36047, 36061, 36081, 36085)
+
+# print a map for each column of the demographic data.frame
+for (i in 2:ncol(df_zip_demographics))
+{
+  # set the data and title
+  df_zip_demographics$value = df_zip_demographics[,i]
+  title = paste0("2013 New York City ZCTA Demographics:\n",
+                 colnames(df_zip_demographics[i]))
+  
+  # print the map
+  choro = zip_choropleth(df_zip_demographics, title=title, county_zoom=nyc_fips)
+  print(choro)
+}
+```
