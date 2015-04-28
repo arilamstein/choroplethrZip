@@ -5,9 +5,15 @@ date: "April 28, 2015"
 output: html_document
 ---
 
-choroplethrZip v1.3.0 ships with selected zip code demographic data from the US Census Bureau. The data comes from the 2013 5-year American Community Survey (ACS). Technically the regions are Zip Code Tabulated Areas (ZCTAS), not USPS ZIP Codes [(link)](https://www.census.gov/geo/reference/zctas.html).
+### Introduction
 
-Here is the data:
+In a [previous](http://rpubs.com/arilamstein/zip-vignette-2) vignette I demonstrated how to use choroplethrZip to get and visualize data from the US Census Bureau. choroplethrZip version 1.3.0 introduces a data.frame `df_zip_demographics` which contains eight statistics from the 2013 5-year American Community Survey (ACS). Additionally, it introduces a function `?get_zip_demographics` which can get those same statistics from other ACS surveys.
+
+As always, technically the regions are Zip Code Tabulated Areas (ZCTAS), not USPS ZIP Codes [(link)](https://www.census.gov/geo/reference/zctas.html).
+
+### Data
+
+Here are the statistics in `df_zip_demographics`:
 
 ```{r}
 library(choroplethrZip)
@@ -16,6 +22,8 @@ data(df_zip_demographics)
 
 colnames(df_zip_demographics)
 ```
+
+### Visualization
 
 Here is a program that visualizes the data for New York City as a choropleth map:
 
