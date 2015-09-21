@@ -129,7 +129,7 @@ ZipChoropleth = R6Class("ZipChoropleth",
 #' @param msa_zoom An optional vector of MSA (Metroplitan/Micropolitan Statistical Area) names to zoom in on. Elements of this 
 #' vector must exactly match the names of the state names as they appear in the "cbsa.title" column 
 #' of ?zip.regions.
-#'
+#' @param reference_map If true, render the choropleth over a reference map.
 #' @note Nationwide zip choropleths can take a few minutes to render. 
 #' It is much faster to view a subset of the country by selecting a zoom. 
 #' @examples
@@ -177,7 +177,7 @@ ZipChoropleth = R6Class("ZipChoropleth",
 #' @importFrom ggplot2 ggplot aes geom_polygon scale_fill_brewer ggtitle theme theme_grey element_blank geom_text
 #' @importFrom ggplot2 scale_fill_continuous scale_colour_brewer ggplotGrob annotation_custom 
 #' @importFrom scales comma
-zip_choropleth = function(df, title="", legend="", num_colors=7, state_zoom=NULL, county_zoom=NULL, msa_zoom=NULL, zip_zoom=NULL)
+zip_choropleth = function(df, title="", legend="", num_colors=7, state_zoom=NULL, county_zoom=NULL, msa_zoom=NULL, zip_zoom=NULL, reference_map=FALSE)
 {
   # nationwide map is special - no borders and insets for AK and HI
   if (is.null(state_zoom) && is.null(county_zoom) && is.null(msa_zoom) && is.null(zip_zoom))
@@ -197,6 +197,10 @@ zip_choropleth = function(df, title="", legend="", num_colors=7, state_zoom=NULL
     c$legend = legend
     c$set_zoom_zip(state_zoom=state_zoom, county_zoom=county_zoom, msa_zoom=msa_zoom, zip_zoom=zip_zoom)
     c$set_num_colors(num_colors)
-    c$render()
+    if (reference_map) {
+      c$render_with_reference_map()
+    } else {
+      c$render()
+    }
   }
 }
