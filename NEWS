@@ -1,6 +1,6 @@
 choroplethrZip 1.4.0
 -------------------------------
--function ?zip_choropleth now has a parameter reference_map which defaults to false. If set to true it will add a google map reference map.
+-function ?zip_choropleth now has a parameter reference_map which defaults to false. If set to true it will add a reference map from google maps.
 
 choroplethrZip 1.3.0
 -------------------------------

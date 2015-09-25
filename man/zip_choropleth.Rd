@@ -34,7 +34,7 @@ of ?zip.regions.}
 \item{zip_zoom}{An optional vector of zip codes to zoom in on. Elements of this vector must exactly
 match the names of zips as they appear in the "region" column of ?zip.regions.}
 
-\item{reference_map}{If true, render the choropleth over a reference map.}
+\item{reference_map}{If true, render the choropleth over a reference map from Google Maps.}
 }
 \description{
 Note that what is rendered are 2010 US Census Zip Code Tabulated Areas (ZCTAs), not USPS Zip Codes. The

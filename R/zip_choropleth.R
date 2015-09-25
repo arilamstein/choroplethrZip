@@ -129,7 +129,7 @@ ZipChoropleth = R6Class("ZipChoropleth",
 #' @param msa_zoom An optional vector of MSA (Metroplitan/Micropolitan Statistical Area) names to zoom in on. Elements of this 
 #' vector must exactly match the names of the state names as they appear in the "cbsa.title" column 
 #' of ?zip.regions.
-#' @param reference_map If true, render the choropleth over a reference map.
+#' @param reference_map If true, render the choropleth over a reference map from Google Maps.
 #' @note Nationwide zip choropleths can take a few minutes to render. 
 #' It is much faster to view a subset of the country by selecting a zoom. 
 #' @examples
@@ -182,6 +182,10 @@ zip_choropleth = function(df, title="", legend="", num_colors=7, state_zoom=NULL
   # nationwide map is special - no borders and insets for AK and HI
   if (is.null(state_zoom) && is.null(county_zoom) && is.null(msa_zoom) && is.null(zip_zoom))
   {
+    if (reference_map == TRUE)
+    {
+      stop("Reference maps do not currently work with maps that have insets, such as maps of the 50 US States.")
+    }
     warning(paste0("Nationwide zip choropleths can take a few minutes to render. ",
             "It is much faster to view a subset of the country by selecting a zoom. ",
             "See ?zip_choropleth for zoom options."))
