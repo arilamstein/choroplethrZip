@@ -54,4 +54,4 @@ test_that("msa_zoom returns ggplot", {
 #  expect_is(zip_choropleth(df_pop_zip,
 #                           title="2012 USA\nZip Population Estimates",
 #                           legend="Population"), "ggplot")
-})
+#})

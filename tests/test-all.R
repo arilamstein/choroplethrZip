@@ -1,4 +1,3 @@
-#library(testthat)
-#library(choroplethrZip)
+library(testthat)
 
-#test_package("choroplethrZip")
+test_package("choroplethrZip")
