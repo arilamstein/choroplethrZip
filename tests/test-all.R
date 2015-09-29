@@ -1,3 +1,3 @@
-library(testthat)
+#library(testthat)
 
-test_package("choroplethrZip")
+#test_package("choroplethrZip")
