@@ -140,35 +140,44 @@ ZipChoropleth = R6Class("ZipChoropleth",
 #'
 #' # zooming on a state
 #' zip_choropleth(df_pop_zip, 
-#'                state_zoom="new york", 
-#'                title="2012 New York State ZCTA Population Estimates", 
-#'                legend="Population")
+#'                state_zoom = "new york", 
+#'                title      = "2012 New York State ZCTA Population Estimates", 
+#'                legend     = "Population")
 #' 
+#' # adding a reference map
+#' zip_choropleth(df_pop_zip, 
+#'                state_zoom    = "new york", 
+#'                title         = "2012 New York State ZCTA Population Estimates", 
+#'                legend        = "Population",
+#'                reference_map = TRUE)
+#'
 #' # viewing on a set of counties
 #' # note we use numeric county FIPS codes
 #' nyc_fips = c(36005, 36047, 36061, 36081, 36085)
 #' zip_choropleth(df_pop_zip, 
-#'                county_zoom=nyc_fips, 
-#'                title="2012 New York City ZCTA Population Estimates", 
-#'                legend="Population")
+#'                county_zoom = nyc_fips, 
+#'                title       = "2012 New York City ZCTA Population Estimates", 
+#'                legend      = "Population")
 #'
 #' # zooming in on a few ZIPs
 #' manhattan_les = c("10002", "10003", "10009")
 #' manhattan_ues = c("10021", "10028", "10044", "10128")
 #' zip_choropleth(df_pop_zip,
-#'               zip_zoom=c(manhattan_les, manhattan_ues),
-#'               title="2012 Lower and Upper East Side ZCTA Population Estimates",
-#'               legend="Population")
+#'               zip_zoom = c(manhattan_les, manhattan_ues),
+#'               title    = "2012 Lower and Upper East Side ZCTA Population Estimates",
+#'               legend   = "Population")
 #'
 #' # zooming in on an entire Metropolitan Statistical Area (MSA)
 #' zip_choropleth(df_pop_zip, 
-#'                msa_zoom="New York-Newark-Jersey City, NY-NJ-PA", 
-#'                title="2012 NY-Newark-Jersey City MSA\nZCTA Population Estimates",
-#'                legend="Population")
+#'                msa_zoom = "New York-Newark-Jersey City, NY-NJ-PA", 
+#'                title    = "2012 NY-Newark-Jersey City MSA\nZCTA Population Estimates",
+#'                legend   = "Population")
 #'                
 #'  # showing the entire country
 #'  # note: this takes a few minutes to run
-#'  zip_choropleth(df_pop_zip, title="2012 US ZCTA Population Estimates", legend="Population")
+#'  zip_choropleth(df_pop_zip, 
+#'                title  = "2012 US ZCTA Population Estimates", 
+#'                legend = "Population")
 #' }
 #' @seealso \url{https://www.census.gov/geo/reference/zctas.html} for an explanation of ZCTAs and how they relate to US Zip Codes.
 #' @export
