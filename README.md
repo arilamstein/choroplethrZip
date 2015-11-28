@@ -5,9 +5,9 @@ Master: [![Build Status](https://travis-ci.org/arilamstein/choroplethrZip.svg)](
 
 R package with shapefile, metadata and visualization functions for US Zip Code Tabulated Areas (ZCTAs).
 
-## Free Course
+## Training & Development
 
-My free course [Learn to Map Census Data in R](http://www.arilamstein.com/free-course) can teach you how to use this package. Enjoy!
+My free course [Learn to Map Census Data in R](http://www.arilamstein.com/free-course) can teach you how to use this package. I blog about this package's development [here](http://www.arilamstein.com/blog).
 
 ## Installation
 
