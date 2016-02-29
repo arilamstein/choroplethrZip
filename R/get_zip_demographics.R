@@ -38,18 +38,18 @@ get_zip_demographics = function(endyear=2013, span=5)
   df_race = df_race[, c("region", "total_population", "percent_white", "percent_black", "percent_asian", "percent_hispanic")]
   
   # per capita income 
-  df_income = choroplethr::get_acs_data("B19301", "zip", endyear=2013, span=5)[[1]]  
+  df_income = choroplethr::get_acs_data("B19301", "zip", endyear=endyear, span=span)[[1]]  
   colnames(df_income)[[2]] = "per_capita_income"
   
   # median rent
-  df_rent = get_acs_data("B25058", "zip", endyear=2013, span=5)[[1]]  
+  df_rent = get_acs_data("B25058", "zip", endyear=endyear, span=span)[[1]]  
   colnames(df_rent)[[2]] = "median_rent"
   
   # median age
   # can't do get_acs_data here because there seems to be a bug with how column_idx is treated right now
-  #df_age = get_acs_data("B01002", "zip", endyear=2013, span=5, column_idx=1)[[1]]  
-  age    = acs::acs.fetch(geography=zip_geo, table.number = "B01002", col.names = "pretty", endyear = 2013, span = 5)
-  df_age = choroplethr:::convert_acs_obj_to_df("zip", age, 1) 
+  #df_age = get_acs_data("B01002", "zip", endyear=endyear, span=span, column_idx=1)[[1]]  
+  age    = acs::acs.fetch(geography=zip_geo, table.number = "B01002", col.names = "pretty", endyear = endyear, span = span)
+  df_age = choroplethr:::convert_acs_obj_to_df("zip", age, 1, FALSE) 
   colnames(df_age)[[2]] = "median_age"
   
   df_demographics = merge(df_race        , df_income, all.x=TRUE)
