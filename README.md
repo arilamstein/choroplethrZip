@@ -17,4 +17,4 @@ install_github('arilamstein/choroplethrZip@v1.5.0')
 
 ## Documentation
 
-Documentation on how to use choroplethrZip, along with information about a free course, can be found [here](arilamstein.com/open-source).
+Documentation on how to use choroplethrZip, along with information about a free course, can be found [here](http://www.arilamstein.com/open-source).
