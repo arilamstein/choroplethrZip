@@ -5,10 +5,6 @@ Master: [![Build Status](https://travis-ci.org/arilamstein/choroplethrZip.svg)](
 
 R package with shapefile, metadata and visualization functions for US Zip Code Tabulated Areas (ZCTAs).
 
-## Training & Development
-
-My free course [Learn to Map Census Data in R](http://www.arilamstein.com/free-course) can teach you how to use this package. I blog about this package's development [here](http://www.arilamstein.com/blog).
-
 ## Installation
 
 Due to this package's size (~60MB) it is hosted on github, not CRAN. To install the latest stable release type the following from an R console:
@@ -19,12 +15,6 @@ library(devtools)
 install_github('arilamstein/choroplethrZip@v1.5.0')
 ```
 
-## Usage
+## Documentation
 
-This package ships with two vignettes which explain how to use the package. For convenience I have also published them online:
-
-1. [Creating ZIP Code Choropleths with *choroplethrZip*](http://rpubs.com/arilamstein/zip-vignette-1)
-1. [Creating ZIP Code Choropleths of US Census Data with *choroplethrZip*](http://rpubs.com/arilamstein/zip-vignette-2)
-2. [Zip Code Demographics with choroplethrZip v1.3.0](http://rpubs.com/arilamstein/zip-vignette-3)
-
-In short: type `?zip_choropleth` and `?zip_choropleth_acs` after installing the package to get started.
+Documentation on how to use choroplethrZip, along with information about a free course, can be found [here](arilamstein.com/open-source).
