@@ -1,8 +1,5 @@
 # choroplethrZip
 
-v1.5.0: [![Build Status](https://travis-ci.org/arilamstein/choroplethrZip.svg?branch=v1.4.0)](https://travis-ci.org/arilamstein/choroplethrZip/branches)
-Master: [![Build Status](https://travis-ci.org/arilamstein/choroplethrZip.svg)](https://travis-ci.org/arilamstein/choroplethrZip)
-
 R package with shapefile, metadata and visualization functions for US Zip Code Tabulated Areas (ZCTAs).
 
 ## Installation
