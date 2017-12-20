@@ -19,7 +19,3 @@ If you would like a guided introduction to choroplethr, then take the free cours
 ## Documentation
 
 Documentation for choroplethr can be found [here](http://www.arilamstein.com/open-source).
-
-## Support
-
-Support for choroplethr can be found [here](http://www.arilamstein.com/choroplethr-support).
