@@ -8,6 +8,7 @@ ZipChoropleth = R6Class("ZipChoropleth",
   inherit = Choropleth,
   public = list(
     
+    palette = NULL,
     # initialize with a ZIP map
     initialize = function(user.df)
     {
@@ -18,6 +19,14 @@ ZipChoropleth = R6Class("ZipChoropleth",
       {
         warning("Please see ?zip.regions for a list of mappable regions")
       }
+    },
+    
+    set_palette = function(val) {
+      self$palette <- val
+    },
+    
+    get_palette = function() {
+      self$palette
     },
     
     # All zooms, at the end of the day, are zip zooms. But often times it is more natural
@@ -63,21 +72,33 @@ ZipChoropleth = R6Class("ZipChoropleth",
       # first render the continental us
       continental_zips   = zip.regions[!zip.regions$state.name %in% c("alaska", "hawaii"), "region"]
       continental.df     = self$choropleth.df[self$choropleth.df$region %in% continental_zips, ]
-      continental.ggplot = self$render_helper(continental.df, self$scale_name, self$theme_clean()) + ggtitle(self$title)
+      continental.ggplot = if(is.null(self$palette)){
+                              self$render_helper(continental.df, self$scale_name, self$theme_clean()) + ggtitle(self$title) 
+                           } else {
+                              self$render_helper(continental.df, self$scale_name, self$theme_clean()) + ggtitle(self$title) + scale_fill_brewer(palette=self$palette, drop=FALSE)
+                           }
       
       ret = continental.ggplot
       
       # render ak and add as inset
       ak_zips       = zip.regions[zip.regions$state.name == "alaska", "region"]
       alaska.df     = self$choropleth.df[self$choropleth.df$region %in% ak_zips, ]
-      alaska.ggplot = self$render_helper(alaska.df, "", self$theme_inset())
+      alaska.ggplot = if(is.null(self$palette)){
+                        self$render_helper(alaska.df, "", self$theme_inset())
+                      } else {
+                        self$render_helper(alaska.df, "", self$theme_inset()) + scale_fill_brewer(palette=self$palette, drop=FALSE)
+                      }
       alaska.grob   = ggplotGrob(alaska.ggplot)
       ret           = ret + annotation_custom(grobTree(alaska.grob), xmin=-125, xmax=-110, ymin=22.5, ymax=30)
 
       # render hi and add as inset
       hi_zips       = zip.regions[zip.regions$state.name == "hawaii", "region"]
       hawaii.df     = self$choropleth.df[self$choropleth.df$region %in% hi_zips, ]
-      hawaii.ggplot = self$render_helper(hawaii.df, "", self$theme_inset())
+      hawaii.ggplot = if(is.null(self$palette)){
+                        self$render_helper(hawaii.df, "", self$theme_inset())
+                      } else {
+                        self$render_helper(hawaii.df, "", self$theme_inset()) + scale_fill_brewer(palette=self$palette, drop=FALSE)
+                      }
       hawaii.grob   = ggplotGrob(hawaii.ggplot)
       ret           = ret + annotation_custom(grobTree(hawaii.grob), xmin=-107.5, xmax=-102.5, ymin=25, ymax=27.5)
 
@@ -115,7 +136,8 @@ ZipChoropleth = R6Class("ZipChoropleth",
 #' @param df A data.frame with a column named "region" and a column named "value".  Elements in 
 #' the "region" column must exactly match how regions are named in the "region" column in ?zip.map.
 #' @param title An optional title for the map.  
-#' @param legend An optional name for the legend.  
+#' @param legend An optional name for the legend. 
+#' @param palette An optional scale_fill_brewer color palette to customize colors. 
 #' @param num_colors The number of colors on the map. A value of 1 
 #' will use a continuous scale. A value in [2, 9] will use that many colors. 
 #' @param zip_zoom An optional vector of zip codes to zoom in on. Elements of this vector must exactly 
@@ -186,7 +208,7 @@ ZipChoropleth = R6Class("ZipChoropleth",
 #' @importFrom ggplot2 ggplot aes geom_polygon scale_fill_brewer ggtitle theme theme_grey element_blank geom_text
 #' @importFrom ggplot2 scale_fill_continuous scale_colour_brewer ggplotGrob annotation_custom 
 #' @importFrom scales comma
-zip_choropleth = function(df, title="", legend="", num_colors=7, state_zoom=NULL, county_zoom=NULL, msa_zoom=NULL, zip_zoom=NULL, reference_map=FALSE)
+zip_choropleth = function(df, title="", legend="", num_colors=7, palette=NULL,state_zoom=NULL, county_zoom=NULL, msa_zoom=NULL, zip_zoom=NULL, reference_map=FALSE)
 {
   # nationwide map is special - no borders and insets for AK and HI
   if (is.null(state_zoom) && is.null(county_zoom) && is.null(msa_zoom) && is.null(zip_zoom))
@@ -203,6 +225,7 @@ zip_choropleth = function(df, title="", legend="", num_colors=7, state_zoom=NULL
     c$title  = title
     c$legend = legend
     c$set_num_colors(num_colors)
+    c$palette = palette
     c$render_nationwide()
   } else {
     c = ZipChoropleth$new(df)
@@ -210,6 +233,7 @@ zip_choropleth = function(df, title="", legend="", num_colors=7, state_zoom=NULL
     c$legend = legend
     c$set_zoom_zip(state_zoom=state_zoom, county_zoom=county_zoom, msa_zoom=msa_zoom, zip_zoom=zip_zoom)
     c$set_num_colors(num_colors)
+    c$palette = palette
     if (reference_map) {
       c$render_with_reference_map()
     } else {
