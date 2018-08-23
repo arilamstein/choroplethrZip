@@ -1,0 +1,19 @@
+navbar:
+  title: ~
+  type: default
+  left:
+  - text: Home
+    href: https://www.arilamstein.com
+  - text: Choroplethr
+    href: https://arilamstein.com/open-source/
+  - text: Courses
+    href: https://courses.arilamstein.com/
+  - text: Corporate Services
+    href: https://arilamstein.com/corporate-services/
+
+destination: ../documentation/choroplethrZip
+
+template:
+  params:
+    ganalytics: UA-63439615-1
+
