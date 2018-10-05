@@ -8,6 +8,7 @@ ZipChoropleth = R6Class("ZipChoropleth",
   inherit = Choropleth,
   public = list(
     
+    inset_outline = NULL,
     # initialize with a ZIP map
     initialize = function(user.df)
     {
@@ -18,6 +19,14 @@ ZipChoropleth = R6Class("ZipChoropleth",
       {
         warning("Please see ?zip.regions for a list of mappable regions")
       }
+    },
+    
+    set_inset_outline = function(val) {
+      self$inset_outline <- val
+    },
+    
+    get_inset_outline = function() {
+      self$inset_outline
     },
     
     # All zooms, at the end of the day, are zip zooms. But often times it is more natural
@@ -60,6 +69,11 @@ ZipChoropleth = R6Class("ZipChoropleth",
 
       self$prepare_map()
       
+      #print(paste0("scale_name: ",self$scale_name))
+      #print(paste0("super$get_scale(): ",super$get_scale()))
+      #print(self$ggplot_scale)
+      #print(self$scale_name)
+      
       # first render the continental us
       continental_zips   = zip.regions[!zip.regions$state.name %in% c("alaska", "hawaii"), "region"]
       continental.df     = self$choropleth.df[self$choropleth.df$region %in% continental_zips, ]
@@ -71,6 +85,10 @@ ZipChoropleth = R6Class("ZipChoropleth",
       ak_zips       = zip.regions[zip.regions$state.name == "alaska", "region"]
       alaska.df     = self$choropleth.df[self$choropleth.df$region %in% ak_zips, ]
       alaska.ggplot = self$render_helper(alaska.df, "", self$theme_inset())
+      if (!is.null(self$inset_outline))
+      {
+        alaska.ggplot = alaska.ggplot + self$render_state_outline('alaska')
+      }
       alaska.grob   = ggplotGrob(alaska.ggplot)
       ret           = ret + annotation_custom(grobTree(alaska.grob), xmin=-125, xmax=-110, ymin=22.5, ymax=30)
 
@@ -78,6 +96,10 @@ ZipChoropleth = R6Class("ZipChoropleth",
       hi_zips       = zip.regions[zip.regions$state.name == "hawaii", "region"]
       hawaii.df     = self$choropleth.df[self$choropleth.df$region %in% hi_zips, ]
       hawaii.ggplot = self$render_helper(hawaii.df, "", self$theme_inset())
+      if (!is.null(self$inset_outline))
+      {
+        hawaii.ggplot = hawaii.ggplot + self$render_state_outline('hawaii')
+      }
       hawaii.grob   = ggplotGrob(hawaii.ggplot)
       ret           = ret + annotation_custom(grobTree(hawaii.grob), xmin=-107.5, xmax=-102.5, ymin=25, ymax=27.5)
 
@@ -92,16 +114,30 @@ ZipChoropleth = R6Class("ZipChoropleth",
       {
         ggplot(choropleth.df, aes(long, lat, group = group)) +
           geom_polygon(aes(fill = value), size = 0) + 
-          self$get_scale() + 
+          self$get_scale() +
           theme;
       } else { # assume character or factor
         stopifnot(length(unique(na.omit(choropleth.df$value))) <= 9) # brewer scale only goes up to 9
         
         ggplot(choropleth.df, aes(long, lat, group = group)) +
           geom_polygon(aes(fill = value), size = 0) + 
-          self$get_scale() + 
+          self$get_scale() +  
           theme;
       }
+    },
+    
+    render_state_outline = function(states)
+    {
+      if (!requireNamespace("choroplethrMaps", quietly = TRUE)) {
+        stop("Package choroplethrMaps is needed for this function to work. Please install it.", call. = FALSE)
+      }
+      data(state.map, package="choroplethrMaps", envir=environment())
+      data(state.regions, package="choroplethrMaps", envir=environment())
+      
+      stopifnot(states %in% state.regions$region)
+      
+      df = state.map[state.map$region %in% states, ]
+      geom_polygon(data=df, aes(long, lat, group = group), color = self$inset_outline, fill = NA, size = 0.2);
     }
   )
 )
@@ -130,6 +166,7 @@ ZipChoropleth = R6Class("ZipChoropleth",
 #' vector must exactly match the names of the state names as they appear in the "cbsa.title" column 
 #' of ?zip.regions.
 #' @param reference_map If true, render the choropleth over a reference map from Google Maps.
+#' @param inset_outline An optionsal string to change the color of the inset outline for render_nationwide, defaults to no outline.
 #' @note Nationwide zip choropleths can take a few minutes to render. 
 #' It is much faster to view a subset of the country by selecting a zoom. 
 #' @examples
@@ -186,7 +223,7 @@ ZipChoropleth = R6Class("ZipChoropleth",
 #' @importFrom ggplot2 ggplot aes geom_polygon scale_fill_brewer ggtitle theme theme_grey element_blank geom_text
 #' @importFrom ggplot2 scale_fill_continuous scale_colour_brewer ggplotGrob annotation_custom 
 #' @importFrom scales comma
-zip_choropleth = function(df, title="", legend="", num_colors=7, state_zoom=NULL, county_zoom=NULL, msa_zoom=NULL, zip_zoom=NULL, reference_map=FALSE)
+zip_choropleth = function(df, title="", legend="", num_colors=7, state_zoom=NULL, county_zoom=NULL, msa_zoom=NULL, zip_zoom=NULL, reference_map=FALSE, inset_outline=NULL)
 {
   # nationwide map is special - no borders and insets for AK and HI
   if (is.null(state_zoom) && is.null(county_zoom) && is.null(msa_zoom) && is.null(zip_zoom))
@@ -203,6 +240,7 @@ zip_choropleth = function(df, title="", legend="", num_colors=7, state_zoom=NULL
     c$title  = title
     c$legend = legend
     c$set_num_colors(num_colors)
+    c$inset_outline = inset_outline
     c$render_nationwide()
   } else {
     c = ZipChoropleth$new(df)
