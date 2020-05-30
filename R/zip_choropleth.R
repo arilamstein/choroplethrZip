@@ -63,7 +63,7 @@ ZipChoropleth = R6Class("ZipChoropleth",
       # first render the continental us
       continental_zips   = zip.regions[!zip.regions$state.name %in% c("alaska", "hawaii"), "region"]
       continental.df     = self$choropleth.df[self$choropleth.df$region %in% continental_zips, ]
-      continental.ggplot = self$render_helper(continental.df, self$scale_name, self$theme_clean()) + ggtitle(self$title)
+      continental.ggplot = self$render_helper(continental.df, self$scale_name, self$theme_clean()) + ggtitle(self$title, self$subtitle)
       
       ret = continental.ggplot
       
@@ -82,7 +82,7 @@ ZipChoropleth = R6Class("ZipChoropleth",
       ret           = ret + annotation_custom(grobTree(hawaii.grob), xmin=-107.5, xmax=-102.5, ymin=25, ymax=27.5)
 
       ret +
-        ggtitle(self$title)
+        ggtitle(self$title, self$subtitle)
     },
     
     render_helper = function(choropleth.df, scale_name, theme)
@@ -102,6 +102,18 @@ ZipChoropleth = R6Class("ZipChoropleth",
           self$get_scale() + 
           theme;
       }
+    },
+    
+    # per https://arilamstein.com/blog/2018/06/27/choroplethr-v3-6-2-is-now-on-cran/
+    theme_clean = function()
+    {
+      ggplot2::theme_void()
+    },
+    theme_inset = function()
+    {
+      '%+replace%' <- ggplot2::'%+replace%' # nolint
+      ggplot2::theme_void() %+replace%
+        ggplot2::theme(legend.position = "none")
     }
   )
 )
@@ -114,7 +126,8 @@ ZipChoropleth = R6Class("ZipChoropleth",
 #' 
 #' @param df A data.frame with a column named "region" and a column named "value".  Elements in 
 #' the "region" column must exactly match how regions are named in the "region" column in ?zip.map.
-#' @param title An optional title for the map.  
+#' @param title An optional title for the map.
+#' @param subtitle An optional subtitle for the map.    
 #' @param legend An optional name for the legend.  
 #' @param num_colors The number of colors on the map. A value of 1 
 #' will use a continuous scale. A value in [2, 9] will use that many colors. 
@@ -186,7 +199,8 @@ ZipChoropleth = R6Class("ZipChoropleth",
 #' @importFrom ggplot2 ggplot aes geom_polygon scale_fill_brewer ggtitle theme theme_grey element_blank geom_text
 #' @importFrom ggplot2 scale_fill_continuous scale_colour_brewer ggplotGrob annotation_custom 
 #' @importFrom scales comma
-zip_choropleth = function(df, title="", legend="", num_colors=7, state_zoom=NULL, county_zoom=NULL, msa_zoom=NULL, zip_zoom=NULL, reference_map=FALSE)
+zip_choropleth = function(df, title="", subtitle="", 
+                          legend="", num_colors=7, state_zoom=NULL, county_zoom=NULL, msa_zoom=NULL, zip_zoom=NULL, reference_map=FALSE)
 {
   # nationwide map is special - no borders and insets for AK and HI
   if (is.null(state_zoom) && is.null(county_zoom) && is.null(msa_zoom) && is.null(zip_zoom))
@@ -201,6 +215,7 @@ zip_choropleth = function(df, title="", legend="", num_colors=7, state_zoom=NULL
     
     c = ZipChoropleth$new(df)
     c$title  = title
+    c$subtitle = subtitle
     c$legend = legend
     c$set_num_colors(num_colors)
     c$render_nationwide()
@@ -208,6 +223,7 @@ zip_choropleth = function(df, title="", legend="", num_colors=7, state_zoom=NULL
     c = ZipChoropleth$new(df)
     c$title  = title
     c$legend = legend
+    c$subtitle = subtitle
     c$set_zoom_zip(state_zoom=state_zoom, county_zoom=county_zoom, msa_zoom=msa_zoom, zip_zoom=zip_zoom)
     c$set_num_colors(num_colors)
     if (reference_map) {
