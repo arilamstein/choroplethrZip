@@ -102,6 +102,18 @@ ZipChoropleth = R6Class("ZipChoropleth",
           self$get_scale() + 
           theme;
       }
+    },
+    
+    # per https://arilamstein.com/blog/2018/06/27/choroplethr-v3-6-2-is-now-on-cran/
+    theme_clean = function()
+    {
+      ggplot2::theme_void()
+    },
+    theme_inset = function()
+    {
+      '%+replace%' <- ggplot2::'%+replace%' # nolint
+      ggplot2::theme_void() %+replace%
+        ggplot2::theme(legend.position = "none")
     }
   )
 )
